@@ -1,0 +1,42 @@
+.contact {
+  margin-right: 5px;
+  width: 60%;
+  margin-left: 20%;
+  margin-bottom: 1rem;
+  height: 2.5rem;
+}
+
+.btn.btn-primary.btn-lg.btn-default.subscribe {
+  height: 40px;
+  margin-right: 5px;
+  padding-bottom: 40px;
+}
+
+.btn-group.options {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.descriptfield {
+  text-align: left;
+}
+.noshow { display:none !important;}
+
+.divprops{
+  margin-right: 5px;
+  width: 60%;
+  margin-left: 20%;
+  height: 2.5rem;
+}
+
+.select2-selection__choice__display{
+  color:black;
+  font-size: smaller;
+}
+
+input:valid+span:after {
+  position: absolute;
+  content: '✓';
+  padding-left: 5px;
+  color: #009000;
+}

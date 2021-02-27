@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Stonks</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-light navbar-expand-md navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#">Celebritrade</a><button data-toggle="collapse" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" value="Menu"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item nav-link js-scroll-trigger"><a class="nav-link active js-scroll-trigger" href="#about">About</a></li>
+                    <li class="nav-item nav-link js-scroll-trigger"><a class="nav-link js-scroll-trigger" href="#form">Subscribe</a></li>
+                    <li class="nav-item nav-link js-scroll-trigger"><a class="nav-link js-scroll-trigger" href="#source">Source</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="background-image:url('assets/img/wired-uk-stonks.jpg');">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="brand-heading">Celebritrade</h1>
+                        <p class="intro-text" style="font-weight: 400; font-size: 35px;">Never miss a rally</p><a class="btn btn-link btn-circle" role="button" href="#about"><i class="fa fa-angle-double-down animated"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="about" class="content-section text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>About&nbsp;</h2>
+                    <p>Enter your +1 number and the Twitter @ handles you want to subscribe to.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                    <p>Specify how you would like to get notified:</p>
+                    <p> - Call and Text</p>
+                    <p> - Text Only</p>
+                    <p>Get notified when your celebrity tweets about a company or stock!</p>
+                    <p>Includes latest stock price, trending news articles, and sentiment score of the tweet.</p>
+                </div>
+                <div><img src="assets/img/smartmockups_klnyqnpg.png" alt="phone mockup"> </div>
+            </div>
+        </div>
+    </section>
+    <section id="form" class="download-section content-section text-center" style="background-image:url('assets/img/high-short-interest-stocks.jpg');">
+        <div class="container">
+        
+            <div class="col-lg-8 mx-auto">
+                <h2>Subscribe&nbsp;</h2>
+                <div class="form-group">
+                    <div class="form-row">
+                        <input type="tel" id="phone_input" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                         class="contact form-control" placeholder="Phone format: 000-000-0000" required><span class="validity"></span>
+                    </div>
+                    <div class="form-row divprops">
+                        <select class="form-control tokening" id="handle_input" multiple="multiple">
+                          </select>
+                    </div>
+                    <div class="btn-group options" role="group"><button class="btn btn-primary"  type="button">Call+Text</button><button class="btn btn-primary" type="button">text only</button></div>
+                    <button class="btn btn-primary btn-lg btn-default subscribe" type="button" onclick="validateSend()">Subscribe</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section id="source" class="content-section text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Source</h2>
+                    <ul class="list-inline banner-social-buttons">
+                        <li class="list-inline-item">&nbsp;</li>
+                        <li class="list-inline-item">&nbsp;<button class="btn btn-primary btn-lg btn-default" type="button"><i class="fa fa-github fa-fw"></i><span class="network-name">&nbsp;github</span></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="map-clean"></div>
+    <footer>
+        <div class="container text-center">
+            <p>Built by Shreyas Kudari @ VTHacks 8</p>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="assets/js/grayscale.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        var calltext;
+        var number;
+        var re = new RegExp("[0-9]{3}-[0-9]{3}-[0-9]{4}");
+    
+        $('.btn-group .btn').on("click",function(){
+            calltext = $(this).text()
+        })
+       
+        $(".tokening").select2({
+            tags: true,
+            tokenSeparators: [',', ' '],
+            dropdownCssClass: 'noshow',
+            width: '100%',
+            height: '100%',
+            placeholder: 'Twitter @users'
+        })
+        function gethandles(){
+            let handles = [];
+            $("li").each(function(){
+                let value = ($(this).attr('title'));
+                if(value!=undefined){
+                    value = value.replace("@", '');
+                    value = value.replace("#", '');
+                    if(value!=""){
+                        handles.push(value);
+                    }
+                }
+            })
+            return handles;
+        }
+        function validateSend(){
+            number = $('#phone_input').val();
+            number = number.trim();
+            var handles = gethandles();
+            if(!re.test(number)){
+                alert("Invalid phone number");
+            }else if(handles.length==0){
+                alert("Please enter Tweet handles to follow!");
+            }else if(calltext==null){
+                alert("Please select a notification option!");
+            }
+            else{
+                // handles = handles.match(/\S+/g);
+                number = number.replace(/-/g, "");
+                postsettings = {
+                    url: "https://celebritrade.herokuapp.com/add_user",
+                    method: "POST",
+                    crossDomain: true,
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        "handles": handles,
+                        "phone": number,
+                        "option": calltext
+                    })
+                };
+                $('.subscribe').prop("disabled", true);
+                // try animation
+                $.ajax(postsettings).done(function(res){
+                    $('.subscribe').prop("disabled", false);
+                        calltext=null;
+                        
+                    if(res==='Posted'){
+                        alert("Subscribed!");
+                    }else{
+                        alert("Failed!");
+                    }
+                
+                });
+
+            }
+        }
+    </script>
+</body>
+
+</html>
